@@ -35,21 +35,21 @@ message:"What is the name of your project?",
             },
             {
                 type:"imput",
-                name:"Installations",
+                name:"installation",
                 message:"What command needs to be run to install any dependencies?",
                 
                 
                 },
                 {
                     type:"imput",
-                    name:"UsageInformation",
+                    name:"usage",
                     message:"Is there anything the user should know about the project?",
                     
                     
                     },
                     {
                         type:"imput",
-                        name:"ContributionGuidelines",
+                        name:"contribution",
                         message:"What should a user know about contributing to thie project?",
                         
                         
@@ -63,10 +63,18 @@ message:"What is the name of your project?",
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+return fs.writeFileSync(path.join(process.cwd(),fileName),data)
+
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+inquirer.prompt(questions).then((inquirerResponses)=>{
+    writeToFile("readme.md",markdown({...inquirerResponses}))
+})
+
+}
 
 // Function call to initialize app
 init();
